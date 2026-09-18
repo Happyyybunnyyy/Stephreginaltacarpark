@@ -1,0 +1,6 @@
+{
+  "name": "Singapore Carpark Live",
+  "description": "Real-time Singapore carpark availability finder with interactive map, nearby lot search, live capacity indicators, and built-in 10 Usability Heuristics framework.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
