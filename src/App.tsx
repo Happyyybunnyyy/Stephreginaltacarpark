@@ -160,8 +160,42 @@ export default function App() {
     }, 400);
   };
 
-  // Refresh data handler
-  const handleRefresh = () => {
+  // Refresh data handler - queries /api/carparkavailability if configured, with graceful fallback
+  const handleRefresh = async () => {
+    setIsRefreshing(true);
+    try {
+      const res = await fetch('/api/carparkavailability');
+      const data = await res.json();
+      if (res.ok && data.success && Array.isArray(data.value) && data.value.length > 0) {
+        setCarparks((prev) =>
+          prev.map((cp) => {
+            const matched = data.value.find(
+              (item: any) =>
+                (item.Development && cp.name.toLowerCase().includes(item.Development.toLowerCase())) ||
+                (item.Development && item.Development.toLowerCase().includes(cp.name.toLowerCase())) ||
+                item.CarParkID === cp.id
+            );
+            if (matched && typeof matched.AvailableLots === 'number') {
+              return {
+                ...cp,
+                availableLots: matched.AvailableLots,
+                lastUpdated: 'Just now (LTA Live)',
+              };
+            }
+            return cp;
+          })
+        );
+        setIsRefreshing(false);
+        setLastUpdatedTime('Just now');
+        setToast({
+          message: `Live data synced from LTA DataMall (${data.totalRecordsReturned} records)`,
+        });
+        return;
+      }
+    } catch {
+      // Fallback to simulation
+    }
+
     simulateLotFluctuation();
   };
 

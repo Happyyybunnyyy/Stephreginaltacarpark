@@ -182,6 +182,63 @@ export const GuideView: React.FC = () => {
       ) : (
         /* API Connection Blueprint Section */
         <div className="space-y-4">
+          {/* Serverless Endpoints Card */}
+          <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-3">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 font-bold text-slate-900 text-sm">
+                <Zap size={16} className="text-emerald-600" />
+                <span>Installed Serverless Endpoints (/api)</span>
+              </div>
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
+                Active in /api
+              </span>
+            </div>
+
+            <p className="text-xs text-slate-600 leading-relaxed">
+              The project root now includes serverless handlers that safely proxy real-time queries to LTA DataMall without exposing API keys to client browsers:
+            </p>
+
+            <div className="space-y-2 text-xs">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <div className="flex items-center justify-between font-mono font-bold text-slate-800 text-[11px]">
+                  <span>GET /api/health</span>
+                  <a
+                    href="/api/health"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-600 hover:underline flex items-center gap-1 font-sans text-xs font-semibold"
+                  >
+                    Open <ExternalLink size={11} />
+                  </a>
+                </div>
+                <p className="text-slate-500 text-[11px] mt-1">
+                  Health check verifying uptime and whether <code className="text-slate-800 font-mono">LTA_ACCOUNT_KEY</code> is configured.
+                </p>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                <div className="flex items-center justify-between font-mono font-bold text-slate-800 text-[11px]">
+                  <span>GET /api/carparkavailability</span>
+                  <a
+                    href="/api/carparkavailability"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-emerald-600 hover:underline flex items-center gap-1 font-sans text-xs font-semibold"
+                  >
+                    Open <ExternalLink size={11} />
+                  </a>
+                </div>
+                <p className="text-slate-500 text-[11px] mt-1">
+                  Serverless connection pulling live lot availability across HDB, LTA, and URA carparks with the <code className="text-slate-800 font-mono">AccountKey</code> header.
+                </p>
+              </div>
+            </div>
+
+            <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-emerald-900">
+              <span className="font-bold">Configuration:</span> Set your <code className="bg-white/80 px-1 py-0.5 rounded font-mono font-semibold">LTA_ACCOUNT_KEY</code> in environment secrets or <code className="bg-white/80 px-1 py-0.5 rounded font-mono font-semibold">.env</code>. No keys are hardcoded in source code.
+            </div>
+          </div>
+
           <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-xs space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 font-bold text-slate-900 text-sm">
